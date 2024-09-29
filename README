@@ -1,0 +1,10 @@
+1. В директориях nomad-client и nomad-server должны лежать директории с исполняемым файлом nomad.
+На исполняемый файл ссылкаются в nomad-client/start.sh и nomad-server/Dockerfile.
+
+2. С помощью команды `docker compose up -d` запускается инфраструктура с consul и nomad.
+Смотри дополнительные комментарии в docker-compose.yaml.
+Consul агент будет доступен по localhost:8500
+
+3. Nomad клиент запускается вне докера с помощью команды `cd nomad-client && sudo ./start.sh`.
+В файле nomad-client/config/nomad.hcl берется ip адрес из интерфейса eth0. Если у тебя другой интерфейс, то поправь файл.
+Адрес nomad client смотри в consul.

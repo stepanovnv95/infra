@@ -5,6 +5,8 @@ services:
       - consul-server:/bitnami/consul
 
   consul-client:
+    # Клиент не обязательно нужен, можно использовать consul сервер в качестве клиента.
+    # Тут используется клиент чтобы можно было скопировать пример, если потребуется другая конфигурация.
     image: docker.io/bitnami/consul:1.19.0
     depends_on:
       - consul-server
@@ -14,17 +16,17 @@ services:
       - CONSUL_RETRY_JOIN_ADDRESS=consul-server
     ports:
       - "8500:8500"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
     volumes:
       - consul-client:/bitnami/consul
 
   nomad-server:
     build: nomad
     depends_on:
-      - consul-server
+      - consul-client
     volumes:
-      - ./nomad/server-config:/etc/nomad.d:ro
+      - ./nomad-server/config:/etc/nomad.d:ro
+      # После команды `docker compose down` нужно пересоздать volume
+      # с помощью команды `docker volume rm infra_nomad-server`
       - nomad-server:/opt/nomad
 
 volumes:
