@@ -1,5 +1,5 @@
 1. В директориях nomad-client и nomad-server должны лежать директории с исполняемым файлом nomad.
-На исполняемый файл ссылкаются в nomad-client/start.sh и nomad-server/Dockerfile.
+На исполняемый файл ссылаются в nomad-client/start.sh и nomad-server/Dockerfile.
 
 2. С помощью команды `docker compose up -d` запускается инфраструктура с consul и nomad.
 Смотри дополнительные комментарии в docker-compose.yaml.
